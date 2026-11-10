@@ -2,43 +2,68 @@
 
 Hệ thống Backend API cho dự án E-Commerce (EShop), phục vụ Frontend Web, Mobile và Quản trị viên (Admin).
 
-## Yêu cầu Hệ thống
+---
+
+## 🚀 Hướng Dẫn Deploy Lên Render (Web Service)
+
+1. Đăng nhập vào [Render Dashboard](https://dashboard.render.com).
+2. Nhấn **New +** -> Chọn **Web Service**.
+3. Chọn repository GitHub: `vdt12a11/backend-eshop`.
+4. Cấu hình các thông số sau:
+   - **Name**: `backend-eshop` (hoặc tên tuỳ thích).
+   - **Language**: `Node`.
+   - **Branch**: `main`.
+   - **Build Command**: `npm install`.
+   - **Start Command**: `npm start`.
+   - **Instance Type**: `Free`.
+5. *(Tùy chọn)* Mục **Environment Variables**:
+   - `PORT`: Render tự động cấp, **không cần điền**.
+   - `SECRET_KEY`: Khóa bí mật cho JWT (nếu không điền, hệ thống sẽ dùng khóa mặc định).
+6. Nhấn **Deploy Web Service**. Sau khi deploy xong, bạn sẽ có URL dạng: `https://backend-eshop-xxxx.onrender.com`.
+
+---
+
+## 💻 Chạy Cục Bộ (Local Development)
+
+### 1. Yêu cầu Hệ thống
 - **Node.js** >= 18.x
 - **npm** >= 9.x
 
-## Cài đặt
-1. Cài đặt các thư viện phụ thuộc:
-   ```bash
-   npm install
-   ```
-
-2. (Tùy chọn) Khởi tạo cơ sở dữ liệu và dữ liệu mẫu:
-   - Chạy script tạo lại DB mẫu:
-     ```bash
-     node database.js
-     ```
-   - Hoặc sinh dữ liệu kiểm thử tự động với Faker:
-     ```bash
-     node seed-faker.js
-     ```
-   - Hoặc chạy migration bằng Flyway:
-     ```bash
-     node flyway.js
-     ```
-
-## Khởi chạy Server
-Khởi chạy backend server:
+### 2. Cài đặt thư viện
 ```bash
-node server.js
+npm install
 ```
-Server sẽ chạy mặc định tại: `http://localhost:3000`
 
-## Kiểm thử (Testing)
-- Kiểm thử cấu trúc cơ sở dữ liệu (Database Schema, Tables, Columns & Constraints):
+### 3. Khởi chạy Server
+```bash
+npm start
+```
+Server sẽ chạy tại `http://localhost:3000`.
+
+### 4. (Tùy chọn) Thao tác với Database SQLite
+- Khởi tạo database mẫu:
   ```bash
+  node database.js
+  ```
+- Sinh thêm dữ liệu mẫu ngẫu nhiên bằng Faker:
+  ```bash
+  node seed-faker.js
+  ```
+- Chạy Database Migration với Flyway:
+  ```bash
+  node flyway.js
+  ```
+
+---
+
+## 🧪 Kiểm thử (Testing)
+- Kiểm thử cấu trúc cơ sở dữ liệu (Schema, bảng, cột, kiểu dữ liệu):
+  ```bash
+  npm test
+  # hoặc
   node db-structural.test.js
   ```
-- Kiểm thử chức năng Profile:
+- Kiểm thử chức năng thông tin cá nhân (Profile):
   ```bash
   node test_profile.js
   ```

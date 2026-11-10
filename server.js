@@ -5,11 +5,20 @@ const db = require("./database");
 const jwt = require("jsonwebtoken");
 
 const app = express();
-const PORT = 3000;
-const SECRET_KEY = "super_secret_key_that_should_not_be_here";
+const PORT = process.env.PORT || 3000;
+const SECRET_KEY = process.env.SECRET_KEY || "super_secret_key_that_should_not_be_here";
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// Healthcheck endpoint for Render / deployment monitoring
+app.get("/", (req, res) => {
+  res.json({ message: "EShop Backend API is running successfully!", status: "OK" });
+});
+
+app.get("/health", (req, res) => {
+  res.json({ status: "healthy" });
+});
 
 const userCarts = {};
 
